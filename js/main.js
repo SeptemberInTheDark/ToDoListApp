@@ -94,12 +94,23 @@
         return;
       }
 
+      let todoItem = createTodoItem(todoItemForm.input.value);
+
+      //Добавляем обработчики на кнопки
+      todoItem.doneButton.addEventListener('click',function() {
+        todoItem.item.classList.toggle('list-group-item-success');
+      });
+
+      todoItem.deleteButton.addEventListener('click', function() {
+        if (confirm('Вы уверены?')) {
+          todoItem.item.remove();
+        }
+      });
+
       //создаем и добавляем в список новое дело с названием из поля для ввода
-      todoList.append(createTodoItem(todoItemForm.input.value).item);
+      todoList.append(todoItem.item);
       //обнуляем значение в поле, чтобы не пришлось стирать кго вручную
       todoItemForm.input.value = '';
     });
-
   });
-
 })();
